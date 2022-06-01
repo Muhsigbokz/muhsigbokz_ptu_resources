@@ -1,5 +1,5 @@
 {
-    "name": "Muhsigbokz/muhsigbokz_ptu_resources",
+    "name": "muhsigbokz_ptu_resources",
     "title": "Muhsigbokz PTU Resources",
     "description": "<p>Some PTU Macros and other things I came up with. No guarantees for quality or functionality, but likely still a valuable resource for most.",
     "version": "0.1",
@@ -9,17 +9,17 @@
             "name": "muhsigbokz-ptu-macros",
             "label": "Muhsigbokz PTU Macros",
             "path": "muhsigbokz-ptu-macros.db",
-            "module": "Muhsigbokz/muhsigbokz_ptu_resources",
+            "module": "muhsigbokz_ptu_resources",
             "entity": "Macro",
             "system": "ptu"
         }
     ],
-    "url": "https://github.com/Muhsigbokz/Muhsigbokz/muhsigbokz_ptu_resources",
-    "manifest": "https://raw.githubusercontent.com/Muhsigbokz/Muhsigbokz/muhsigbokz_ptu_resources/master/module.json",
-    "bugs": "https://github.com/Muhsigbokz/Muhsigbokz/muhsigbokz_ptu_resources/issues",
-    "readme": "https://raw.githubusercontent.com/Muhsigbokz/Muhsigbokz/muhsigbokz_ptu_resources/master/README.md",
-    "changelog": "https://github.com/Muhsigbokz/Muhsigbokz/muhsigbokz_ptu_resources/releases",
-    "license": "https://raw.githubusercontent.com/Muhsigbokz/Muhsigbokz/muhsigbokz_ptu_resources/master/LICENSE.md",
+    "url": "https://github.com/Muhsigbokz/muhsigbokz_ptu_resources",
+    "manifest": "https://raw.githubusercontent.com/Muhsigbokz/muhsigbokz_ptu_resources/master/module.json",
+    "bugs": "https://github.com/Muhsigbokz/muhsigbokz_ptu_resources/issues",
+    "readme": "https://raw.githubusercontent.com/Muhsigbokz/muhsigbokz_ptu_resources/master/README.md",
+    "changelog": "https://github.com/Muhsigbokz/muhsigbokz_ptu_resources/releases",
+    "license": "https://raw.githubusercontent.com/Muhsigbokz/muhsigbokz_ptu_resources/master/LICENSE.md",
     "socket": true,
     "minimumCoreVersion": "9",
     "compatibleCoreVersion": "9"
