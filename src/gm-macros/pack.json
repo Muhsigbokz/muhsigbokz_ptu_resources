@@ -1,7 +1,7 @@
 {
     "name": "gm-macros",
     "label": "Muhsigbokz PTU GM Macros",
-    "path": "muhsigbokz-ptu-gm-macros.db",
+    "path": "generated/muhsigbokz-ptu-gm-macros.db",
     "module": "muhsigbokz_ptu_resources",
     "entity": "Macro",
     "system": "ptu",

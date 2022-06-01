@@ -1,7 +1,7 @@
 {
     "name": "player-macros",
     "label": "Muhsigbokz PTU Player Macros",
-    "path": "muhsigbokz-ptu-player-macros.db",
+    "path": "generated/muhsigbokz-ptu-player-macros.db",
     "module": "muhsigbokz_ptu_resources",
     "entity": "Macro",
     "system": "ptu",
