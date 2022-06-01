@@ -100,7 +100,7 @@ def main():
     subprocess.check_call(["git", "add", "module.json"])
 
     readme_string = open(f"{src}/stubs/README-stub.md").read()
-    readme_string.replace("//PACKS//", packs_md_stub_string)
+    readme_string = readme_string.replace("//PACKS//", packs_md_stub_string)
     with open("README.md", "w") as readme_file:
         readme_file.write(readme_string)
     subprocess.check_call(["git", "add", "README.md"])
