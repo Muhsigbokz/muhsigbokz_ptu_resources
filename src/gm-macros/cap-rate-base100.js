@@ -2,6 +2,8 @@
 // name:[GM] CapRate of Token (w/o Shiny)
 // img:https://pngimg.com/uploads/pokeball/pokeball_PNG19.png
 
+//
+
 const ten = ["Burned", "Frozen", "Paralysis", "Poisoned", "Badly Poisoned", "Slowed"]
 const fifteen = ["Stuck"]
 const round_turn_regex = /^R[0-9]* - T[0-9]*:/

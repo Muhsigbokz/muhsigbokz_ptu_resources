@@ -41,8 +41,7 @@ def next_minor_increment():
     return ".".join(lastline_split)
 
 
-def macro_from_path(js_file_name, pack, src):
-    js_file_path = f"{src}/{pack}/{js_file_name}"
+def macro_from_path(js_file_path, pack, src):
     macro = load(open(f"{src}/{pack}/default.json"))
     js_file_content = open(js_file_path).read()
     macro["command"] = js_file_content
@@ -55,7 +54,7 @@ def macro_from_path(js_file_name, pack, src):
 
 
 def base_module_object(github_project, module_version, src):
-    module = load(open(f"{src}/module-stub.json"))
+    module = load(open(f"{src}/stubs/module-stub.json"))
     module["url"] = f"https://github.com/{github_project}"
     module["manifest"] = f"https://raw.githubusercontent.com/{github_project}/master/module.json"
     module["bugs"] = f"https://github.com/{github_project}/issues"
@@ -78,14 +77,19 @@ def main():
 
     module = base_module_object(github_project, module_version, src)
     pack_objects = []
+    packs_md_stub_string = ""
     for pack in packs:
         pack_object = load(open(f"{src}/{pack}/pack.json"))
         pack_objects.append(pack_object)
+        packs_md_stub_string += f"## {pack_object['Label']}\n\nIn `{src}/{pack}`\n\n"
         entities_strings = []
         js_file_names = [file for file in os.listdir(f"{src}/{pack}") if file.endswith(".js")]
         for js_file_name in js_file_names:
-            macro = macro_from_path(js_file_name, pack, src)
+            js_file_path = f"{src}/{pack}/{js_file_name}"
+            macro = macro_from_path(js_file_path, pack, src)
             entities_strings.append(dumps(macro))
+            with open(js_file_path.replace(".js", ".md"), "r") as md_file:
+                packs_md_stub_string += md_file.read() + "\n\n"
         with open(pack_object["path"], "w") as db_file:
             db_file.write("\n".join(entities_strings))
         subprocess.check_call(["git", "add", f"{pack_object['path']}"])
@@ -94,8 +98,16 @@ def main():
     module["packs"] = pack_objects
     dump(module, open("module.json", "w"), indent=4)
     subprocess.check_call(["git", "add", "module.json"])
+
+    readme_string = open(f"{src}/stubs/README-stub.md").read()
+    readme_string.replace("//PACKS//", packs_md_stub_string)
+    with open("README.md", "w") as readme_file:
+        readme_file.write(readme_string)
+    subprocess.check_call(["git", "add", "README.md"])
+
     subprocess.check_call(["git", "commit", "-am", f"'Auto commit for {module_version}'"])
     subprocess.check_call(["git", "tag", f"{module_version}"])
+
 
 
 if __name__ == '__main__':
