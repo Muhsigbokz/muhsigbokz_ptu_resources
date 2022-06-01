@@ -1,5 +1,6 @@
 // _id:p2qr3l1pcbbwgdog
 // name:Set Trainer and Pokemon Prototype token
+// img:https://freepngimg.com/thumb/tool/1-2-tool-free-png-image.png
 
 // For some reasons, they store them as int
 const RESOURCE_NEVER_DISPLAYED = 0

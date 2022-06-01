@@ -1,5 +1,7 @@
 // _id:m4byik5x5jsqm783
 // name:[GM] Set LinkActorData for whole directories, no sub directories
+// img:https://freepngimg.com/thumb/tool/1-2-tool-free-png-image.png
+
 let agenda = [{"id": null, "path": ["Root"]}]
 let all = []
 const currentDialogId = randomID()

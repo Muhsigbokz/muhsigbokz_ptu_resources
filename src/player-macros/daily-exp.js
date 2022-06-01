@@ -1,6 +1,6 @@
 // _id:4xi6lrywxa5rdq1u
 // name:Daily Exp (Player Trainer)
-
+// img:https://archives.bulbagarden.net/media/upload/f/f3/Dream_Exp._Share_Sprite.png
 
 const currentDialogId = randomID()
 const myActorId = game.user.data.character ? game.user.data.character : "0"

@@ -3,6 +3,7 @@
 //
 // edit the line with
 // const playerName
+// img:https://game-icons.net/icons/000000/transparent/1x1/lorc/bell-shield.png
 
 // Manually set the name of the Sage PLAYERS name, not the Actor/Char
 const playerName = "SomePlayerName"

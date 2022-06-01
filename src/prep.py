@@ -20,6 +20,13 @@ def name_from_js_file_content(content: str, name: str):
     return ids[0]
 
 
+def none_or_key_from_js_file_content(content: str, key: str):
+    finds = re.findall(f"// {key}:(.*)\n", content)
+    if len(finds) < 1:
+        return None
+    return finds[0]
+
+
 def is_git_clean_working_tree():
     result = subprocess.check_output(["git", "status", "--porcelain", "--untracked-files=no"]).decode()
     return result is None or result == ""
@@ -41,11 +48,14 @@ def macro_from_path(js_file_name, pack, src):
     macro["command"] = js_file_content
     macro["_id"] = id_from_js_file_content(js_file_content, js_file_name)
     macro["name"] = name_from_js_file_content(js_file_content, js_file_name)
+    img = none_or_key_from_js_file_content(js_file_content, "img")
+    if img is not None:
+        macro["img"] = img
     return macro
 
 
 def base_module_object(github_project, module_version, src):
-    module = load(open(f"{src}/module.json"))
+    module = load(open(f"{src}/module-stub.json"))
     module["url"] = f"https://github.com/{github_project}"
     module["manifest"] = f"https://raw.githubusercontent.com/{github_project}/master/module.json"
     module["bugs"] = f"https://github.com/{github_project}/issues"

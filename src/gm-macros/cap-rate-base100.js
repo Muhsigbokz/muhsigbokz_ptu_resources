@@ -1,5 +1,6 @@
 // _id:t5w36dka5p5ztqte
 // name:[GM] CapRate of Token (w/o Shiny)
+// img:https://pngimg.com/uploads/pokeball/pokeball_PNG19.png
 
 const ten = ["Burned", "Frozen", "Paralysis", "Poisoned", "Badly Poisoned", "Slowed"]
 const fifteen = ["Stuck"]

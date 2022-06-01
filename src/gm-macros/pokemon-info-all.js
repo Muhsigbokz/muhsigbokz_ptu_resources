@@ -1,5 +1,6 @@
 // _id:q1sjkviox8d21cew
 // name:[GM] Pokémon Info for all Users
+// img:https://upload.wikimedia.org/wikipedia/commons/2/29/Octicons-info.svg
 
 function hmtlActorLinkForPokemon(pokemon) {
     return `<a class="entity-link content-link" draggable="true" data-type="Actor" data-entity="Actor" data-id="${pokemon.data._id}"><i class="fas fa-user"></i> ${pokemon.name}</a>`
