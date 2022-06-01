@@ -31,7 +31,7 @@ def next_minor_increment():
     lastline = gitoutput.split("\n")[gitoutput.count("\n")]
     lastline_split = lastline.split(".")
     lastline_split[-1] = str(int(lastline_split[-1]) + 1)
-    return "v0.1.0"
+    return ".".join(lastline_split)
 
 
 def macro_from_path(js_file_name, pack, src):
@@ -60,7 +60,7 @@ def base_module_object(github_project, module_version, src):
 def main():
     src = "src"
     github_project = "Muhsigbokz/muhsigbokz_ptu_resources"
-    module_version = next_minor_increment()
+    module_version = "v0.1.0"
 
     if not is_git_clean_working_tree():
         print("Not clean working tree")
