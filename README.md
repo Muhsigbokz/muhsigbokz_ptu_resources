@@ -8,4 +8,49 @@ If you just want to browse Macros and not install the Add-On Module, check out t
 
 # Packs
 
-//PACKS//
+## Muhsigbokz PTU Player Macros
+
+In `src/player-macros`
+
+### Daily Exp (Command)
+
+adfgg
+
+### awfgbüawfbüwaf
+
+awfwgggg
+
+### akwgvbüäabwg
+
+### awfobawfbawf
+
+ölmafwöfwa
+
+### awfawfawf
+ 
+awdawd
+
+### Metronome Move Pull
+
+awdfgghhh
+
+## Muhsigbokz PTU GM Macros
+
+In `src/gm-macros`
+
+### Capture Rate Calculator Base 100
+
+awdawd
+
+### Mass Link/Unlink Actor Data
+
+awdawd
+
+### All Players Pokémons Info
+
+awdawd
+
+### Glitch 3 - Pull Moves
+
+pulls moves
+
