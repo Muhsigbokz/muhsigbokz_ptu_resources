@@ -1,0 +1,14 @@
+{
+  "_id": null,
+  "name": "Rage",
+  "permission":
+  {
+    "default": 1
+  },
+  "type": "script",
+  "flags": {},
+  "scope": "global",
+  "command": "console.log(1337)",
+  "img": "icons/svg/dice-target.svg",
+  "actorIds": []
+}
