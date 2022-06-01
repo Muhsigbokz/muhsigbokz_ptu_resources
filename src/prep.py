@@ -69,7 +69,7 @@ def base_module_object(github_project, module_version, src):
 def main():
     src = "src"
     github_project = "Muhsigbokz/muhsigbokz_ptu_resources"
-    module_version = next_minor_increment()
+    module_version = "v0.2.0"
 
     if not is_git_clean_working_tree():
         print("Not clean working tree")
