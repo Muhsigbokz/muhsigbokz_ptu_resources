@@ -31,7 +31,7 @@ def next_minor_increment():
     lastline = gitoutput.split("\n")[gitoutput.count("\n")]
     lastline_split = lastline.split(".")
     lastline_split[-1] = str(int(lastline_split[-1]) + 1)
-    return ".".join(lastline_split)
+    return "v0.1.0"
 
 
 def macro_from_path(js_file_name, pack, src):
@@ -82,7 +82,7 @@ def main():
     module["packs"] = pack_objects
     dump(module, open("module.json", "w"), indent=4)
     subprocess.check_call(["git", "commit", "-am", f"'Auto commit for {module_version}'"])
-    subprocess.check_call(["git", "tag", f"'{module_version}'"])
+    subprocess.check_call(["git", "tag", f"{module_version}"])
 
 
 if __name__ == '__main__':
