@@ -12,7 +12,11 @@ If you just want to browse Macros and not install the Add-On Module, check out t
 
 In `src/player-macros`
 
-Hello, this is also some pack### Daily Exp (Player Trainer)
+A bag of what ever macros could be helpful for anyone. If you are a GM 
+and want to test them: many use the current logged ins users marked player character.
+If logged in as GM, some will not function properly.
+
+No third Add-On Modules required.### Daily Exp (Player Trainer)
 
 In `src/player-macros/daily-exp.js`
 
@@ -94,7 +98,10 @@ to any actor for usage. Simple as that.
 
 In `src/gm-macros`
 
-Hello, this is some pack### [GM] CapRate of Token (w/o Shiny)
+A pack with some Macros GMs might like. This pack is hidden to players
+when imported, because they can spoil preparations and would likely not function for players.
+
+No third Add-On Modules required.### [GM] CapRate of Token (w/o Shiny)
 
 In `src/gm-macros/cap-rate-base100.js`
 
