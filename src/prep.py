@@ -75,28 +75,28 @@ def main():
         print("Not clean working tree")
         exit(1)
 
-    module = base_module_object(github_project, module_version, src)
-    pack_objects = []
+    foundry_module = base_module_object(github_project, module_version, src)
+    foundry_pack_objects = []
     packs_md_stub_string = ""
     for pack in packs:
-        pack_object = load(open(f"{src}/{pack}/pack.json"))
-        pack_objects.append(pack_object)
-        packs_md_stub_string += f"## {pack_object['label']}\n\nIn `{src}/{pack}`\n\n"
-        entities_strings = []
+        foundry_pack_object = load(open(f"{src}/{pack}/pack.json"))
+        foundry_pack_objects.append(foundry_pack_object)
+        packs_md_stub_string += f"## {foundry_pack_object['label']}\n\nIn `{src}/{pack}`\n\n"
+        packs_md_stub_string += open(f"{src}/{pack}/pack.md").read()
+        current_packs_entities_strings = []
         js_file_names = [file for file in os.listdir(f"{src}/{pack}") if file.endswith(".js")]
         for js_file_name in js_file_names:
             js_file_path = f"{src}/{pack}/{js_file_name}"
             macro = macro_from_path(js_file_path, pack, src)
-            entities_strings.append(dumps(macro))
-            with open(js_file_path.replace(".js", ".md"), "r") as md_file:
-                packs_md_stub_string += md_file.read() + "\n\n"
-        with open(pack_object["path"], "w") as db_file:
-            db_file.write("\n".join(entities_strings))
-        subprocess.check_call(["git", "add", f"{pack_object['path']}"])
+            current_packs_entities_strings.append(dumps(macro))
+            packs_md_stub_string += f"### {macro['name']}\n\nIn `{js_file_path}`\n\n"
+            packs_md_stub_string += open(js_file_path.replace(".js", ".md")).read() + "\n\n"
+        with open(foundry_pack_object["path"], "w") as db_file:
+            db_file.write("\n".join(current_packs_entities_strings))
+        subprocess.check_call(["git", "add", f"{foundry_pack_object['path']}"])
 
-
-    module["packs"] = pack_objects
-    dump(module, open("module.json", "w"), indent=4)
+    foundry_module["packs"] = foundry_pack_objects
+    dump(foundry_module, open("module.json", "w"), indent=4)
     subprocess.check_call(["git", "add", "module.json"])
 
     readme_string = open(f"{src}/stubs/README-stub.md").read()
@@ -107,7 +107,6 @@ def main():
 
     subprocess.check_call(["git", "commit", "-am", f"'Auto commit for {module_version}'"])
     subprocess.check_call(["git", "tag", f"{module_version}"])
-
 
 
 if __name__ == '__main__':

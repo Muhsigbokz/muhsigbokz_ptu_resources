@@ -47,6 +47,24 @@ const moveSourcesArray = [
         keys: Array.from(game.packs.get("ptu.moves").index.keys())
     }
 ]
+//
+// const moveSourcesArray = [
+//     {
+//         name: "Base Moves",
+//         weight: 1,
+//         map: game.packs.get("ptu.moves"),
+//         keys: Array.from(game.packs.get("ptu.moves").index.keys())
+//     },
+//     {
+//         name: "Glitch Moves",
+//         weight: 100,
+//         map: game.packs.get("world.glitchmoves"),
+//         keys: Array.from(game.packs.get("ptu.glitchmoves").index.keys())
+//     }
+// ]
+
+
+
 const numWeightedIndexes = moveSourcesArray.map(x => x.keys.length * x.weight).reduce((acc, i) => acc + i)
 
 let pulledMoves = []
