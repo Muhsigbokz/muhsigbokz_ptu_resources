@@ -12,8 +12,8 @@
     "readme": "https://raw.githubusercontent.com/Muhsigbokz/muhsigbokz_ptu_resources/master/README.md",
     "changelog": "https://github.com/Muhsigbokz/muhsigbokz_ptu_resources/releases",
     "license": "https://raw.githubusercontent.com/Muhsigbokz/muhsigbokz_ptu_resources/master/LICENSE.md",
-    "download": "https://github.com/Muhsigbokz/muhsigbokz_ptu_resources/archive/refs/tags/v0.1.6.zip",
-    "version": "v0.1.6",
+    "download": "https://github.com/Muhsigbokz/muhsigbokz_ptu_resources/archive/refs/tags/v0.1.7.zip",
+    "version": "v0.1.7",
     "packs": [
         {
             "name": "player-macros",
