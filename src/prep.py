@@ -81,7 +81,7 @@ def main():
     for pack in packs:
         pack_object = load(open(f"{src}/{pack}/pack.json"))
         pack_objects.append(pack_object)
-        packs_md_stub_string += f"## {pack_object['Label']}\n\nIn `{src}/{pack}`\n\n"
+        packs_md_stub_string += f"## {pack_object['label']}\n\nIn `{src}/{pack}`\n\n"
         entities_strings = []
         js_file_names = [file for file in os.listdir(f"{src}/{pack}") if file.endswith(".js")]
         for js_file_name in js_file_names:
