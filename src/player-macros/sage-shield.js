@@ -64,14 +64,27 @@ const sage = {
   }
 }
 
+/**
+ * For what ever ungodly reason, a small wait function in the forEach allows
+ * for mass light animation changes, that would otherwise not work
+ * @param ms
+ * @returns {Promise<unknown>}
+ */
+const waitFor = (ms) => new Promise(r => setTimeout(r, ms));
+
 
 const sageName = sageActor.data.name
 const effectName = sageName + " Sage Damage Reduction"
 const sageOccRank = sageActor.data.data.skills.occultEd.value.total
 
 
-game.canvas.tokens.controlled.forEach(token => {
+game.canvas.tokens.controlled.forEach(async token => {
+  await waitFor(11)
+  console.log("Current token")
+  console.log(token)
   const actor = token.actor
+  console.log("Current actor")
+  console.log(actor)
   let removedExisting = false
   let removeIds = []
   actor.data.effects.filter(e => e.data.label == effectName).forEach( e => {
@@ -81,6 +94,7 @@ game.canvas.tokens.controlled.forEach(token => {
     actor.effects.get(id).delete()
     token.document.update(off)
     removedExisting = true
+    console.log(`Removed ${id}`)
   });
 
 
@@ -93,12 +107,14 @@ game.canvas.tokens.controlled.forEach(token => {
           {"key":"data.modifiers.damageReduction.physical.mod","mode":2,"value":reduction,"priority":40},
           {"key":"data.modifiers.damageReduction.special.mod","mode":2,"value":reduction,"priority":40}],
         label: effectName,
+        label: effectName,
         icon: "",
         transfer: false,
         "flags.ptu.editLocked": false,
         _id: randomID()
     }
     actor.createEmbeddedDocuments("ActiveEffect", [effectData])
+    console.log()
     token.document.update(sage)
   }
 })
