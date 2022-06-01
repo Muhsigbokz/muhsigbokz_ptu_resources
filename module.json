@@ -15,11 +15,11 @@
         }
     ],
     "url": "https://github.com/Muhsigbokz/Muhsigbokz/muhsigbokz_ptu_resources",
-    "manifest": "https://raw.githubusercontent.com/Muhsigbokz/Muhsigbokz/muhsigbokz_ptu_resources/main/module.json",
+    "manifest": "https://raw.githubusercontent.com/Muhsigbokz/Muhsigbokz/muhsigbokz_ptu_resources/master/module.json",
     "bugs": "https://github.com/Muhsigbokz/Muhsigbokz/muhsigbokz_ptu_resources/issues",
-    "readme": "https://raw.githubusercontent.com/Muhsigbokz/Muhsigbokz/muhsigbokz_ptu_resources/main/README.md",
+    "readme": "https://raw.githubusercontent.com/Muhsigbokz/Muhsigbokz/muhsigbokz_ptu_resources/master/README.md",
     "changelog": "https://github.com/Muhsigbokz/Muhsigbokz/muhsigbokz_ptu_resources/releases",
-    "license": "https://raw.githubusercontent.com/Muhsigbokz/Muhsigbokz/muhsigbokz_ptu_resources/main/LICENSE.md",
+    "license": "https://raw.githubusercontent.com/Muhsigbokz/Muhsigbokz/muhsigbokz_ptu_resources/master/LICENSE.md",
     "socket": true,
     "minimumCoreVersion": "9",
     "compatibleCoreVersion": "9"
