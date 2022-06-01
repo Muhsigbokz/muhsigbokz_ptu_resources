@@ -1,5 +1,5 @@
 // _id:p2qr3l1pcbbwgdog
-// Name:Set Trainer and Pokemon Prototype token
+// name:Set Trainer and Pokemon Prototype token
 
 // For some reasons, they store them as int
 const RESOURCE_NEVER_DISPLAYED = 0
