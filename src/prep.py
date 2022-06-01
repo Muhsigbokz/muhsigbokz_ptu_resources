@@ -45,8 +45,8 @@ def macro_from_path(js_file_path, pack, src):
     macro = load(open(f"{src}/{pack}/default.json"))
     js_file_content = open(js_file_path).read()
     macro["command"] = js_file_content
-    macro["_id"] = id_from_js_file_content(js_file_content, js_file_name)
-    macro["name"] = name_from_js_file_content(js_file_content, js_file_name)
+    macro["_id"] = id_from_js_file_content(js_file_content, js_file_path)
+    macro["name"] = name_from_js_file_content(js_file_content, js_file_path)
     img = none_or_key_from_js_file_content(js_file_content, "img")
     if img is not None:
         macro["img"] = img
