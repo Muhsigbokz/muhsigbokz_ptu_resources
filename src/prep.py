@@ -83,6 +83,7 @@ def main():
 
     module["packs"] = pack_objects
     dump(module, open("module.json", "w"), indent=4)
+    subprocess.check_call(["git", "add", "module.json"])
     subprocess.check_call(["git", "commit", "-am", f"'Auto commit for {module_version}'"])
     subprocess.check_call(["git", "tag", f"{module_version}"])
 
