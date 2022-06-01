@@ -2,6 +2,7 @@ import os
 from json import load, dumps, dump
 import re
 import subprocess
+
 packs = ["ptu-macros"]
 
 
@@ -24,33 +25,13 @@ def is_git_clean_working_tree():
     return result is None or result == ""
 
 
-
-def main():
-    src = "src"
-    github_project = "Muhsigbokz/muhsigbokz_ptu_resources"
-    module_version = "v0.0.4"
-    
-    if not is_git_clean_working_tree():
-        print("Not clean working tree")
-        exit(1)
-    
-    module = base_module_object(github_project, module_version, src)
-    pack_objects = []
-    for pack in packs:
-        pack_object = load(open(f"{src}/{pack}/pack.json"))
-        pack_objects.append(pack_object)
-        entities_strings = []
-        js_file_names = [file for file in os.listdir(f"{src}/{pack}") if file.endswith(".js")]
-        for js_file_name in js_file_names:
-            macro = macro_from_path(js_file_name, pack, src)
-            entities_strings.append(dumps(macro))
-        with open(pack_object["path"], "w") as db_file:
-            db_file.write("\n".join(entities_strings))
-            
-            
-    module["packs"] = pack_objects
-    dump(module, open("module.json", "w"), indent=4)
-
+def next_minor_increment():
+    gitoutput = subprocess.check_output(["git", "tag", "--sort=committerdate"]).decode()
+    gitoutput = gitoutput.strip()
+    lastline = gitoutput.split("\n")[gitoutput.count("\n")]
+    lastline_split = lastline.split(".")
+    lastline_split[-1] = str(int(lastline_split[-1]) + 1)
+    return ".".join(lastline_split)
 
 
 def macro_from_path(js_file_name, pack, src):
@@ -74,6 +55,34 @@ def base_module_object(github_project, module_version, src):
     module["download"] = f"https://github.com/{github_project}/archive/refs/tags/{module_version}.zip"
     module["version"] = module_version
     return module
+
+
+def main():
+    src = "src"
+    github_project = "Muhsigbokz/muhsigbokz_ptu_resources"
+    module_version = next_minor_increment()
+
+    if not is_git_clean_working_tree():
+        print("Not clean working tree")
+        exit(1)
+
+    module = base_module_object(github_project, module_version, src)
+    pack_objects = []
+    for pack in packs:
+        pack_object = load(open(f"{src}/{pack}/pack.json"))
+        pack_objects.append(pack_object)
+        entities_strings = []
+        js_file_names = [file for file in os.listdir(f"{src}/{pack}") if file.endswith(".js")]
+        for js_file_name in js_file_names:
+            macro = macro_from_path(js_file_name, pack, src)
+            entities_strings.append(dumps(macro))
+        with open(pack_object["path"], "w") as db_file:
+            db_file.write("\n".join(entities_strings))
+
+    module["packs"] = pack_objects
+    dump(module, open("module.json", "w"), indent=4)
+    subprocess.check_call(["git", "commit", "-am", f"'Auto commit for {module_version}'"])
+    subprocess.check_call(["git", "tag", f"'{module_version}'"])
 
 
 if __name__ == '__main__':
