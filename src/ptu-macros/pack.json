@@ -1,8 +1,0 @@
-{
-    "name": "muhsigbokz-ptu-macros",
-    "label": "Muhsigbokz PTU Macros",
-    "path": "muhsigbokz-ptu-macros.db",
-    "module": "muhsigbokz_ptu_resources",
-    "entity": "Macro",
-    "system": "ptu"
-}

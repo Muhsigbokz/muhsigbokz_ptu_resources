@@ -3,7 +3,7 @@ from json import load, dumps, dump
 import re
 import subprocess
 
-packs = ["ptu-macros"]
+packs = ["player-macros"]
 
 
 def id_from_js_file_content(content: str, name: str):
@@ -60,7 +60,7 @@ def base_module_object(github_project, module_version, src):
 def main():
     src = "src"
     github_project = "Muhsigbokz/muhsigbokz_ptu_resources"
-    module_version = "v0.1.0"
+    module_version = next_minor_increment()
 
     if not is_git_clean_working_tree():
         print("Not clean working tree")

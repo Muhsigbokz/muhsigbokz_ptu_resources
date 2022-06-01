@@ -1,0 +1,12 @@
+{
+  "_id": null,
+  "name": null,
+  "permission":
+  {
+    "default": 1
+  },
+  "type": "script",
+  "scope": "global",
+  "command": "console.log(1337)",
+  "img": "icons/svg/dice-target.svg"
+}
