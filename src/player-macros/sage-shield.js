@@ -9,6 +9,7 @@
 const playerName = "SomePlayerName"
 const sageActor = game.actors.get(game.users.filter(u => u.name === playerName)[0].data.character)
 
+// Or comment both lines above and uncomment the single line below with the correct Actor ID
 // const sageActor = game.get(someId)
 
 const off = {
@@ -92,7 +93,9 @@ game.canvas.tokens.controlled.forEach(async token => {
   })
   removeIds.forEach((id, i) => {
     actor.effects.get(id).delete()
+    // comment below to remove light interaction
     token.document.update(off)
+    // comment above to remove light interaction
     removedExisting = true
     console.log(`Removed ${id}`)
   });
@@ -115,6 +118,8 @@ game.canvas.tokens.controlled.forEach(async token => {
     }
     actor.createEmbeddedDocuments("ActiveEffect", [effectData])
     console.log()
+    // comment below to remove light interaction
     token.document.update(sage)
+    // comment above to remove light interaction
   }
 })
