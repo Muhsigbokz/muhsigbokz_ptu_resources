@@ -6,17 +6,17 @@ import subprocess
 packs = ["ptu-macros"]
 
 
-def id_from_js_file_content(content: str):
+def id_from_js_file_content(content: str, name: str):
     ids = re.findall("// _id:(.*)\n", content)
     if len(ids) != 1:
-        raise Exception("Bad Script")
+        raise Exception(f"Bad Script {name}")
     return ids[0]
 
 
-def name_from_js_file_content(content: str):
+def name_from_js_file_content(content: str, name: str):
     ids = re.findall("// name:(.*)\n", content)
     if len(ids) != 1:
-        raise Exception("Bad Script")
+        raise Exception(f"Bad Script {name}")
     return ids[0]
 
 
@@ -86,4 +86,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main() # x
+    main()  # x
