@@ -78,6 +78,8 @@ def main():
             entities_strings.append(dumps(macro))
         with open(pack_object["path"], "w") as db_file:
             db_file.write("\n".join(entities_strings))
+        subprocess.check_call(["git", "add", f"{pack_object['path']}"])
+
 
     module["packs"] = pack_objects
     dump(module, open("module.json", "w"), indent=4)
