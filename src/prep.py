@@ -3,7 +3,7 @@ from json import load, dumps, dump
 import re
 import subprocess
 
-packs = ["player-macros"]
+packs = ["player-macros", "gm-macros"]
 
 
 def id_from_js_file_content(content: str, name: str):
