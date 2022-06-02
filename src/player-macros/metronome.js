@@ -1,6 +1,7 @@
 // _id:mx6zxbi3zqb4vay1
 // name:Metronome
 // img:https://archives.bulbagarden.net/media/upload/9/92/Misty_Togepi_Metronome.png
+// Authors: Muhsigbokz
 
 
 const forbiddenMoveNames = [
@@ -47,6 +48,22 @@ const moveSourcesArray = [
         keys: Array.from(game.packs.get("ptu.moves").index.keys())
     }
 ]
+//
+// const moveSourcesArray = [
+//     {
+//         name: "Base Moves",
+//         weight: 1,
+//         map: game.packs.get("ptu.moves"),
+//         keys: Array.from(game.packs.get("ptu.moves").index.keys())
+//     },
+//     {
+//         name: "Other cool moves",
+//         weight: 1,
+//         map: game.packs.get("world.mymoves"),
+//         keys: Array.from(game.packs.get("world.mymoves").index.keys())
+//     }
+// ]
+
 const numWeightedIndexes = moveSourcesArray.map(x => x.keys.length * x.weight).reduce((acc, i) => acc + i)
 
 let pulledMoves = []

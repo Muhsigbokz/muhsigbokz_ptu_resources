@@ -1,6 +1,7 @@
 // _id:p2qr3l1pcbbwgdog
 // name:Set Trainer and Pokemon Prototype token
 // img:https://freepngimg.com/thumb/tool/1-2-tool-free-png-image.png
+// Authors: Muhsigbokz
 
 // For some reasons, they store them as int
 const RESOURCE_NEVER_DISPLAYED = 0
@@ -22,7 +23,7 @@ const MY_AND_MY_POKEMONS_NAMES_SHOULD_BE_DISPLAYED = RESOURCE_HOVERED_BY_ANYONE
 //Per default, the trainer is the loggin in users marked player character
 //const trainerActorId = game.user.data.character
 //Could also be set manually
-//const trainerActorId = "ajsdghsafjgajfgasf"
+//const trainerActorId = "jsawr86u757382si"
 const trainerActorId = game.user.data.character
 
 

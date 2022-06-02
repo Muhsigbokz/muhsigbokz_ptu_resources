@@ -1,6 +1,7 @@
 // _id:754plak2oihprtx0
 // name:Glitch3
 // img:https://wiki.p-insurgence.com/File:722.png
+// Authors: Muhsigbokz
 
 
 const forbiddenMoveNames = [

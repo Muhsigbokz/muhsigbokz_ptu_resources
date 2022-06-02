@@ -2,9 +2,20 @@
 
 Macros, Items, and alike.
 
-There are Macros for Players and GMs. The GM macros could be run by players and give out info they should not get. E.g. listing a folder like "PKM When friendly NPC turns evil". This is why there are two different packs for GM and non-GM macros.
+## You want just some macros but not all the hassle
 
-If you just want to browse Macros and not install the Add-On Module, check out the files in `src/[some-pack]/[macro_name].js` - like `src/gm-macros/cap-rate-base100.js` or `src/player-macros/daily-exp.js`. You can easily ignore the `.json` files
+Check the lower parts of this README for the Macros in here and pick the ones you like. Copy paste the
+content of the Javascript files into a Macro and mark it as `script`.
+
+## You want the whole goodness and mediocre community content
+
+Open the admin console of your Foundry VTT instance and download the whole Add-On module via the
+link `https://raw.githubusercontent.com/Muhsigbokz/muhsigbokz_ptu_resources/master/module.json`.
+
+## You want to learn something about writing macros
+
+Great! I also want this to be a resource for best practices and common hacks on how to 
+bend the game to your will. Please ask around, even as an issue in the issue tracker if you want.
 
 # Packs
 

@@ -9,4 +9,4 @@ can be easily commented out. the parts are marked.
 When you want to use this, import the Macro and edit it. **Either** set the Player Name (not char name) on top to 
 the Sage Player (not Char) **or** set the Sage Characters Actor ID in the macro.
 
-TODO make lighting a boolean not via commenting code
+To turn of lighting changes, set the appropriate variable on thop of the macro to `false`.

@@ -1,20 +1,76 @@
 // _id:4xi6lrywxa5rdq1u
 // name:Daily Exp (Player Trainer)
 // img:https://archives.bulbagarden.net/media/upload/f/f3/Dream_Exp._Share_Sprite.png
+// Authors: Muhsigbokz
+
+
+/**
+ * Check if an actor as a FoundryVTT Item. That Item can be an Edge, Feature or inventory Item.
+ * @param actor The actor that is checked for an Item
+ * @param nameIncluded A string that must be included in the searched items title. Not an exact match.
+ * @param descIncluded A string that must be included in the searched items description. Not an exact match.
+ * @returns {boolean}
+ */
+function hasItemWithNameIncludingAndDescriptionIncluding(actor, nameIncluded, descIncluded) {
+    return actor.data.items.filter(i => i.data.name.includes(nameIncluded) && i.data.data.effect.includes(descIncluded)).length > 0
+}
 
 const currentDialogId = randomID()
 const myActorId = game.user.data.character ? game.user.data.character : "0"
 const myActor = game.actors.get(myActorId)
-const myCommandRank = myActor.data.data.skills.command.value.value
-const myTrainerOfChampionsBonus = myActor.data.items.filter(i => i.data.name.includes("Trainer of Champions") && i.data.data.effect.includes("additional +5 Experience"))[0] ? 5 : 0
-const myAmountTrainablePokemon = myActor.data.items.filter(i => i.data.name.includes("Train the Reserves") && i.data.data.effect.includes("equal to twice your Command Rank"))[0] ? myCommandRank * 2 : myCommandRank
 const expCandidatePokemons = game.actors.filter(actor => actor.data.data.owner === myActorId)
 
-const someonesGainedExp = (trainerCommandRank, otherFlatBonus) => (pokemonLevel) => {
-    return (Math.ceil(trainerCommandRank / 2) - 1) * 5 + Math.ceil(pokemonLevel / 2) + otherFlatBonus
+
+const commandRank = myActor.data.data.skills.command.value.value
+const intimidateRank = myActor.data.data.skills.intimidate.value.value
+const pokeEdRank = myActor.data.data.skills.pokemoned.value.value
+const genEdRank = myActor.data.data.skills.generaled.value.value
+const hasTrainerOfChampions = true
+const hasTrainTheReserves = true
+const hasGroomer = true
+const hasBeastmaster = true
+
+
+// Importance of Features
+// Beastmaster > Groomer > CommandTraining
+let allowedPokemon
+let expGainedForLevel
+if (hasBeastmaster) {
+    allowedPokemon = intimidateRank
+    expGainedForLevel = (pokemonLevel) => {
+        return (Math.ceil(intimidateRank / 2) - 1) * 5 + Math.ceil(pokemonLevel / 2) + hasTrainerOfChampions ? 5 : 0
+    }
+} else if (hasGroomer){
+    allowedPokemon = 6
+    const higherSkillRank = Math.max(pokeEdRank, genEdRank)
+    expGainedForLevel = (pokemonLevel) => {
+        return (Math.ceil(higherSkillRank / 2) - 1) * 5 + Math.ceil(pokemonLevel / 2) + hasTrainerOfChampions ? 5 : 0
+    }
+} else if (hasTrainTheReserves){
+    allowedPokemon = commandRank * 2
+    expGainedForLevel = (pokemonLevel) => {
+        return (Math.ceil(commandRank / 2) - 1) * 5 + Math.ceil(pokemonLevel / 2) + hasTrainerOfChampions ? 5 : 0
+    }
+} else {
+    allowedPokemon = commandRank
+    expGainedForLevel = (pokemonLevel) => {
+        return (Math.ceil(commandRank / 2) - 1) * 5 + Math.ceil(pokemonLevel / 2) + hasTrainerOfChampions ? 5 : 0
+    }
 }
 
-const myGainedExp = someonesGainedExp(myCommandRank, myTrainerOfChampionsBonus)
+// Custom Exp
+//---------------
+// if you want something else, uncomment th four line below with proper values and adjust the values
+
+// allowedPokemon = 42
+// expGainedForLevel = (pokemonLevel) => {
+//     return 25 + Math.ceil(pokemonLevel / 2)
+// }
+
+
+//---------------
+
+
 let tablePokemonWidth = 4
 
 var tableSortCounter = 0
@@ -26,7 +82,7 @@ expCandidatePokemons.forEach(currentPokemon => {
     const id = currentPokemon.data._id
     const oldExp = currentPokemon.data.data.level.exp
     const oldLevel = currentPokemon.data.data.level.current
-    const newExp = oldExp + myGainedExp(oldLevel)
+    const newExp = oldExp + expGainedForLevel(oldLevel)
     let htmlLevel = "" + oldLevel
     if (newExp >= currentPokemon.data.data.level.expTillNextLevel) {
         htmlLevel = "" + oldLevel + " => " + (oldLevel + 1)
@@ -58,8 +114,8 @@ let d = new Dialog({
 
 
                 pokemonIds = [...document.getElementsByClassName(currentDialogId)].filter(cb => cb.checked).map(cb => cb.value)
-                if (pokemonIds.length <= myAmountTrainablePokemon) {
-                    let innerHtmlLoad = `<p>Training ${pokemonIds.length} of ${myAmountTrainablePokemon} Pokémon</p>
+                if (pokemonIds.length <= allowedPokemon) {
+                    let innerHtmlLoad = `<p>Training ${pokemonIds.length} of ${allowedPokemon} Pokémon</p>
                                          <p><table>`;
 
                     pokemonIds.forEach(_id => {
@@ -68,7 +124,7 @@ let d = new Dialog({
                         const name = currentPokemon.data.name
                         const oldExp = currentPokemon.data.data.level.exp
                         const oldLevel = currentPokemon.data.data.level.current
-                        const newExp = oldExp + myGainedExp(oldLevel)
+                        const newExp = oldExp + expGainedForLevel(oldLevel)
                         let htmlLevel = "" + oldLevel
                         if (newExp >= currentPokemon.data.data.level.expTillNextLevel) {
                             htmlLevel = "" + oldLevel + " => " + (oldLevel + 1)
@@ -104,7 +160,7 @@ let d = new Dialog({
                                         const name = currentPokemon.data.name
                                         const oldExp = currentPokemon.data.data.level.exp
                                         const oldLevel = currentPokemon.data.data.level.current
-                                        const newExp = oldExp + myGainedExp(oldLevel)
+                                        const newExp = oldExp + expGainedForLevel(oldLevel)
                                         let htmlLevel = "" + oldLevel
                                         if (newExp >= currentPokemon.data.data.level.expTillNextLevel) {
                                             htmlLevel = "" + oldLevel + " => " + (oldLevel + 1)
@@ -161,7 +217,7 @@ let d = new Dialog({
 
                     let tooManyD = new Dialog({
                         title: "Failed Training",
-                        content: `Tried to too many (${pokemonIds.length}) Pokémon, only ${myAmountTrainablePokemon} allowed.`,
+                        content: `Tried to too many (${pokemonIds.length}) Pokémon, only ${allowedPokemon} allowed.`,
                         buttons: {
                             one: {
                                 icon: '<i class="fas fa-check"></i>',

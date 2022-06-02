@@ -1,5 +1,6 @@
 // _id:z44znzdqjwsodbhy
 // name:Reset and Set Trainings
+// Authors: Muhsigbokz
 
 /**
  * This macro

@@ -1,6 +1,7 @@
 // _id:0v8r4tasvn7c4fu5
 // name:Pokémon Info
 // img:https://upload.wikimedia.org/wikipedia/commons/2/29/Octicons-info.svg
+// Authors: Muhsigbokz
 
 personalNotes = ```
 Here is some Space for personal notes <3
