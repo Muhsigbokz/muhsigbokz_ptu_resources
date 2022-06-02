@@ -27,7 +27,9 @@ A bag of what ever macros could be helpful for anyone. If you are a GM
 and want to test them: many use the current logged ins users marked player character.
 If logged in as GM, some will not function properly.
 
-No third Add-On Modules required.### Daily Exp (Player Trainer)
+No third Add-On Modules required.
+
+### Daily Exp (Player Trainer)
 
 In `src/player-macros/daily-exp.js`
 
@@ -156,7 +158,9 @@ In `src/gm-macros`
 A pack with some Macros GMs might like. This pack is hidden to players
 when imported, because they can spoil preparations and would likely not function for players.
 
-No third Add-On Modules required.### [GM] Set LinkActorData for whole directories, no sub directories
+No third Add-On Modules required.
+
+### [GM] Set LinkActorData for whole directories, no sub directories
 
 In `src/gm-macros/folder-wise-link-actor-data.js`
 

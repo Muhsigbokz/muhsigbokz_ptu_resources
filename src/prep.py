@@ -69,7 +69,7 @@ def base_module_object(github_project, module_version, src):
 def main():
     src = "src"
     github_project = "Muhsigbokz/muhsigbokz_ptu_resources"
-    module_version = "v0.3.0"
+    module_version = next_minor_increment()
 
     if not is_git_clean_working_tree():
         print("Not clean working tree")
@@ -82,7 +82,7 @@ def main():
         foundry_pack_object = load(open(f"{src}/{pack}/pack.json"))
         foundry_pack_objects.append(foundry_pack_object)
         packs_md_stub_string += f"## {foundry_pack_object['label']}\n\nIn `{src}/{pack}`\n\n"
-        packs_md_stub_string += open(f"{src}/{pack}/pack.md").read()
+        packs_md_stub_string += open(f"{src}/{pack}/pack.md").read() + "\n\n"
         current_packs_entities_strings = []
         js_file_names = [file for file in os.listdir(f"{src}/{pack}") if file.endswith(".js")]
         for js_file_name in js_file_names:
