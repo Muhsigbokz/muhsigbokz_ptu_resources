@@ -2,9 +2,20 @@
 
 Macros, Items, and alike.
 
-There are Macros for Players and GMs. The GM macros could be run by players and give out info they should not get. E.g. listing a folder like "PKM When friendly NPC turns evil". This is why there are two different packs for GM and non-GM macros.
+## You want just some macros but not all the hassle
 
-If you just want to browse Macros and not install the Add-On Module, check out the files in `src/[some-pack]/[macro_name].js` - like `src/gm-macros/cap-rate-base100.js` or `src/player-macros/daily-exp.js`. You can easily ignore the `.json` files
+Check the lower parts of this README for the Macros in here and pick the ones you like. Copy paste the
+content of the Javascript files into a Macro and mark it as `script`.
+
+## You want the whole goodness and mediocre community content
+
+Open the admin console of your Foundry VTT instance and download the whole Add-On module via the
+link `https://raw.githubusercontent.com/Muhsigbokz/muhsigbokz_ptu_resources/master/module.json`.
+
+## You want to learn something about writing macros
+
+Great! I also want this to be a resource for best practices and common hacks on how to 
+bend the game to your will. Please ask around, even as an issue in the issue tracker if you want.
 
 # Packs
 
@@ -20,9 +31,27 @@ No third Add-On Modules required.### Daily Exp (Player Trainer)
 
 In `src/player-macros/daily-exp.js`
 
-### Daily Exp (Command)
+This macro takes care of your Daily Exp Training. 
 
-adfgg
+All Pokémon owned by you Player Character are listed. It shows both their current
+Exp, the Exp after Training and possible Level Ups. After selecting which Pokémon to train
+there is a confirmation screen. Then, a GM whisper is sent with what you have trained
+to help you bookkeeping and the Exp are added.
+
+*Regarding the ways of Exp Training.* I covered four cases:
+
+1. Beast Master with Intimidate
+2. Groomer with highest of General Education and Pokémon Education
+3. Command Training with Train the Reserves
+4. Command Training without Train the Reserves
+
+I check for the appropriate features by both title and description, but allow for some modifications.
+E.g. `[Level 13] Beast Master intim Training` and `Beast Master` would be found, but `beast master` not.
+If all of this behaviour does not fit you, you can check out the Macro and look
+for a section marked with `// Custom Exp`.
+
+Uncomment the section below and adjust the Math to your liking. I expect
+many table sto rule and home brew the ever living Distortion World out of this topic.
 
 ### Reset and Set Trainings
 
@@ -70,6 +99,39 @@ Run this, then its done.
 Easily customizable. For Resource Bars, Name and Disposition there are all necessary
 values in the script. In the middle of it, select your desired configuration.
 
+### Metronome
+
+In `src/player-macros/metronome.js`
+
+Pull a random Metronome legal Move and display it in chat, draggable to be quickly added
+to any actor for usage. Simple as that.
+
+
+#### How to add custom moves
+
+I assume you have a specific Item Compendium created with moves you want to be able to draw. you can add multiple 
+such Item Compendiums by repeating the steps layed out.
+
+1. Find the package and name of the Compendium. Likely something around `world.myawesomemoves`.
+   1. Open the development console of your browser. (Likely F12)
+   2. Open the console.
+   3. Copy the following command and substitute `<My Custom Moves>` with your Compendiums label as seen in the list of your Compendiums.
+   4. ```game.packs.filter(pack => pack.metadata.label == "<My Custom Moves>").map(pack => `${pack.metadata.package}.${pack.metadata.name}`)```
+   5. You should get a string like `world.mymoves` or `someaddon.coolmoves`. If you get multiple, try them out.
+2. Look in the macro for the line starting `const moveSourcesArray = [`
+3. Comment out the block and uncomment the one below. It should have to entries in an array:
+   the default PTU moves and an example that won't work for you.
+4. Change the four values as follow:
+   1. `name`:  Some name you can recognize yourself
+   2. `weight`: How much more probable you want this move pool drawn compared to others. E.g., if you set it to `10` it is as if
+      each move in this Compendium is ten times in the big bucket you draw from.
+   3. `map`: only substitute `world.mymoves` with the string you got before.
+   4. `keys`: only substitute `world.mymoves` with the string you got before.
+5. Done
+
+
+
+
 ### TEMPLATE Sage Shield Macro for Specific Player
 
 In `src/player-macros/sage-shield.js`
@@ -85,14 +147,7 @@ can be easily commented out. the parts are marked.
 When you want to use this, import the Macro and edit it. **Either** set the Player Name (not char name) on top to 
 the Sage Player (not Char) **or** set the Sage Characters Actor ID in the macro.
 
-TODO make lighting a boolean not via commenting code
-
-### Metronome
-
-In `src/player-macros/metronome.js`
-
-Pull a random Metronome legal Move and display it in chat, draggable to be quickly added
-to any actor for usage. Simple as that.
+To turn of lighting changes, set the appropriate variable on thop of the macro to `false`.
 
 ## Muhsigbokz PTU GM Macros
 
@@ -101,25 +156,7 @@ In `src/gm-macros`
 A pack with some Macros GMs might like. This pack is hidden to players
 when imported, because they can spoil preparations and would likely not function for players.
 
-No third Add-On Modules required.### [GM] CapRate of Token (w/o Shiny)
-
-In `src/gm-macros/cap-rate-base100.js`
-
-This macro calculates a Pokémons capture rate for a d100 roll. It sends the calculation
-and result to chat as a whisper to GM. It takes into account:
-
-1. The Evolution Line of the Pokémon Species (care for custom Pokémon)
-2. The Pokémons Level
-3. HP
-4. Injuries
-5. Effects
-
-Care about the Effects. Any effect that does not look like a Round/Turn Move info or a Training/Order 
-is assumed to be a 'bad status' that improves the catch rate. Always double-check the calc does not
-take something into account it should not.
-
-
-### [GM] Set LinkActorData for whole directories, no sub directories
+No third Add-On Modules required.### [GM] Set LinkActorData for whole directories, no sub directories
 
 In `src/gm-macros/folder-wise-link-actor-data.js`
 
@@ -162,6 +199,24 @@ Pokémon that this trainer own. Of all those Pokémon, grouped per Trainer:
 6. Held Items - where and which one
 7. Trained - whether any training
 
+### [GM] CapRate of Token (w/o Shiny)
+
+In `src/gm-macros/cap-rate-base100.js`
+
+This macro calculates a Pokémons capture rate for a d100 roll. It sends the calculation
+and result to chat as a whisper to GM. It takes into account:
+
+1. The Evolution Line of the Pokémon Species (care for custom Pokémon)
+2. The Pokémons Level
+3. HP
+4. Injuries
+5. Effects
+
+Care about the Effects. Any effect that does not look like a Round/Turn Move info or a Training/Order 
+is assumed to be a 'bad status' that improves the catch rate. Always double-check the calc does not
+take something into account it should not.
+
+
 ### Glitch3
 
 In `src/gm-macros/glitch-3.js`
@@ -172,13 +227,28 @@ This Macro sends a Message to chat that lists three random moves. These moves ca
 from chat into a char sheet to then be run from an actor to properly include all their stats.
 I have no idea how to do this with less pain, so take it for what it is. 
 
-It also offers functionality to add custom Moves that are in a designated Compedium Pack.
+#### How to add custom moves
 
-Assume you have a Compendium called "Glitch Moves" with custom moves like "Glitch Tackle". And you would like to have 
-a lot of these moves pulled compared to the about normal 810 moves Metronome can legally draw.
+I assume you have a specific Item Compendium created with moves you want to be able to draw. you can add multiple 
+such Item Compendiums by repeating the steps layed out.
 
-In the macro is an out commented block starting with `const moveSourcesArray`. There are two objects, one of which 
-has paths like `world.glitchmoves`. Check this out or ask here for help. this need more input...
+1. Find the package and name of the Compendium. Likely something around `world.myawesomemoves`.
+   1. Open the development console of your browser. (Likely F12)
+   2. Open the console.
+   3. Copy the following command and substitute `<My Custom Moves>` with your Compendiums label as seen in the list of your Compendiums.
+   4. ```game.packs.filter(pack => pack.metadata.label == "<My Custom Moves>").map(pack => `${pack.metadata.package}.${pack.metadata.name}`)```
+   5. You should get a string like `world.mymoves` or `someaddon.coolmoves`. If you get multiple, try them out.
+2. Look in the macro for the line starting `const moveSourcesArray = [`
+3. Comment out the block and uncomment the one below. It should have to entries in an array:
+   the default PTU moves and an example that won't work for you.
+4. Change the four values as follow:
+   1. `name`:  Some name you can recognize yourself
+   2. `weight`: How much more probable you want this move pool drawn compared to others. E.g., if you set it to `10` it is as if
+      each move in this Compendium is ten times in the big bucket you draw from.
+   3. `map`: only substitute `world.mymoves` with the string you got before.
+   4. `keys`: only substitute `world.mymoves` with the string you got before.
+5. Done
 
-TODO finish this explanation properly.
+
+
 
